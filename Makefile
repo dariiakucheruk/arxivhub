@@ -12,3 +12,6 @@ migrate_up:
 
 migrate_down:
 	migrate -path db/migration -database "postgresql://root:password@localhost:5432/arxivhub?sslmode=disable" -verbose down
+
+generate_sqlc:
+	sqlc generate

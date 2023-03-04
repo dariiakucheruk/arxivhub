@@ -2,7 +2,7 @@ CREATE TABLE "users" (
                          "id" BIGSERIAL PRIMARY KEY,
                          "username" string UNIQUE NOT NULL,
                          "email" string UNIQUE NOT NULL,
-                         "password" string NOT NULL
+                         "hashed_password" string NOT NULL
 );
 
 CREATE TABLE "papers" (
@@ -10,7 +10,7 @@ CREATE TABLE "papers" (
                           "title" string NOT NULL,
                           "abstract" string NOT NULL,
                           "authors" string NOT NULL,
-                          "short_author" string NOT NULL,
+                          "short_authors" string NOT NULL,
                           "date" date NOT NULL
 );
 
@@ -23,3 +23,5 @@ CREATE TABLE "saved_papers" (
 ALTER TABLE "saved_papers" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "saved_papers" ADD FOREIGN KEY ("paper_id") REFERENCES "papers" ("arxiv_id");
+
+ALTER TABLE saved_papers ADD CONSTRAINT unique_user_paper_pair UNIQUE (user_id, paper_id);
